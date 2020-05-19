@@ -83,7 +83,7 @@ function building(block) {
         fromWhere(block, closest);
 
 
-        // console.log(block,closest)
+        console.log(block,closest)
     }
 }
 
@@ -112,23 +112,21 @@ function findClosest(block) {
 function fromWhere(block, closest) {
     var closestY = closest.getBoundingClientRect().top,
         closestX = closest.getBoundingClientRect().left,
-        closestW = closestX + closest.offsetWidth,
-        closestH = closestY + closest.offsetHeight,
         y = block.getBoundingClientRect().top,
         x = block.getBoundingClientRect().left;
 
-    if (y - block.offsetHeight / 2 >= closestY) {
-        replaceBlock(block,closest,"down")
+    if (y - coef / 2 >= closestY && x + block.offsetWidth / 2 > closestX && x - block.offsetWidth / 2 < closestX) {
+        replaceBlock(block, closest, "down")
     }
-    if (y < closestY + closest.offsetHeight / 2) {
-        replaceBlock(block,closest,"up")
+    if (y < closestY + coef / 2 && x + block.offsetWidth / 2 > closestX && x - block.offsetWidth / 2 < closestX) {
+        replaceBlock(block, closest, "up")
     }
-    // if (x - block.offsetWidth / 2 >= closestX) {
-    //     console.log('right')
-    // }
-    // if (x < closestX + closest.offsetWidth / 2) {
-    //     console.log('left')
-    // }
+    if (x - coef / 2 >= closestX && y + block.offsetHeight / 2 > closestY && y - block.offsetHeight / 2 < closestY) {
+        replaceBlock(block, closest, "right")
+    }
+    if (x < closestX + coef / 2 && y + block.offsetHeight / 2 > closestY && y - block.offsetHeight / 2 < closestY) {
+        replaceBlock(block, closest, "left")
+    }
 }
 
 function replaceBlock(block, closest, from) {
@@ -142,7 +140,16 @@ function replaceBlock(block, closest, from) {
         block.style.top = closest.getBoundingClientRect().top + block.offsetHeight + "px";
         block.style.left = closest.getBoundingClientRect().left + "px";
     }
+    if (from == "left") {
+        block.classList.add('blocks-item--animate');
+        block.style.top = closest.getBoundingClientRect().top + "px";
+        block.style.left = closest.getBoundingClientRect().left - block.offsetWidth + "px";
+    }
+    if (from == "right") {
+        block.classList.add('blocks-item--animate');
+        block.style.top = closest.getBoundingClientRect().top + "px";
+        block.style.left = closest.getBoundingClientRect().left + block.offsetWidth + "px";
+    }
 
     setTimeout(() => block.classList.remove('blocks-item--animate'), 301);
-    
 }

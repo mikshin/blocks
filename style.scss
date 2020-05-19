@@ -20,10 +20,20 @@
     height: 50px;
     font-size: 0;
     cursor: pointer;
-
+    
     &.blocks-item--animate {
         transition: .3s ease top, .3s ease left;
     }
+
+    // TODO: Удалить
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // &:before {
+    //     content: '+';
+    //     font-size: 90px;
+    //     font-weight: 100;
+    // }
 }
 
 .view {
