@@ -20,7 +20,10 @@
     height: 50px;
     font-size: 0;
     cursor: pointer;
-    
+
+    &.blocks-item--animate {
+        transition: .3s ease top, .3s ease left;
+    }
 }
 
 .view {

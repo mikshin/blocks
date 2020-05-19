@@ -122,9 +122,21 @@ var blocks = document.querySelectorAll('.blocks-item');
 var blocksContainer = document.querySelector('.blocks');
 var viewContainer = document.querySelector('.view');
 var coef = 25;
-window.onload = init; // инициализация
+window.onload = init; //обработчик событий кнопки
+
+document.querySelector(".button.button--add").onclick = function () {
+  console.log();
+  var div = document.createElement("div");
+  div.classList.add("blocks-item");
+  div.innerHTML = this.parentNode.querySelector("input").value;
+  blocksContainer.append(div);
+  init();
+}; // инициализация
+
 
 function init() {
+  blocks = document.querySelectorAll('.blocks-item');
+
   for (var i = 0; blocks.length > i; i++) {
     blocks[i].style.backgroundColor = blocks[i].innerHTML;
     blocks[i].id = "block_" + i;
@@ -146,11 +158,13 @@ function moving(block) {
 
 
   document.onmouseup = function () {
-    eventsNone("");
-    inject(block);
-    building(block);
-    document.onmousemove = null;
-    block.onmouseup = null;
+    if (event.target == blocksContainer || event.target == viewContainer) {
+      eventsNone("");
+      inject(block);
+      building(block);
+      document.onmousemove = null;
+      block.onmouseup = null;
+    }
   };
 } // перемещение за курсором
 
@@ -191,7 +205,10 @@ function eventsNone(tmp) {
 }
 
 function building(block) {
-  var closest = findClosest(block);
+  if (findClosest(block)) {
+    var closest = findClosest(block);
+    fromWhere(block, closest); // console.log(block,closest)
+  }
 }
 
 function findClosest(block) {
@@ -213,6 +230,47 @@ function findClosest(block) {
       }
     }
   }
+}
+
+function fromWhere(block, closest) {
+  var closestY = closest.getBoundingClientRect().top,
+      closestX = closest.getBoundingClientRect().left,
+      closestW = closestX + closest.offsetWidth,
+      closestH = closestY + closest.offsetHeight,
+      y = block.getBoundingClientRect().top,
+      x = block.getBoundingClientRect().left;
+
+  if (y - block.offsetHeight / 2 >= closestY) {
+    replaceBlock(block, closest, "down");
+  }
+
+  if (y < closestY + closest.offsetHeight / 2) {
+    replaceBlock(block, closest, "up");
+  } // if (x - block.offsetWidth / 2 >= closestX) {
+  //     console.log('right')
+  // }
+  // if (x < closestX + closest.offsetWidth / 2) {
+  //     console.log('left')
+  // }
+
+}
+
+function replaceBlock(block, closest, from) {
+  if (from == "up") {
+    block.classList.add('blocks-item--animate');
+    block.style.top = closest.getBoundingClientRect().top - block.offsetHeight + "px";
+    block.style.left = closest.getBoundingClientRect().left + "px";
+  }
+
+  if (from == "down") {
+    block.classList.add('blocks-item--animate');
+    block.style.top = closest.getBoundingClientRect().top + block.offsetHeight + "px";
+    block.style.left = closest.getBoundingClientRect().left + "px";
+  }
+
+  setTimeout(function () {
+    return block.classList.remove('blocks-item--animate');
+  }, 301);
 }
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -242,7 +300,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63085" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61772" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
