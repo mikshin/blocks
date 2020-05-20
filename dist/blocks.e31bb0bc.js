@@ -122,6 +122,7 @@ var blocks = document.querySelectorAll('.blocks-item');
 var blocksContainer = document.querySelector('.blocks');
 var viewContainer = document.querySelector('.view');
 var coef = 25;
+var lastZindex = 1;
 window.onload = init; //обработчик событий кнопки
 
 document.querySelector(".button.button--add").onclick = function () {
@@ -182,7 +183,6 @@ function inject(block) {
     block.style.position = "";
     block.style.top = "";
     block.style.left = "";
-    block.style.zIndex = "";
   }
 } // проверяем в какой блок попадает
 
@@ -259,26 +259,28 @@ function fromWhere(block, closest) {
 function replaceBlock(block, closest, from) {
   if (from == "up") {
     block.classList.add('blocks-item--animate');
-    block.style.top = closest.getBoundingClientRect().top - block.offsetHeight + "px";
+    block.style.top = closest.getBoundingClientRect().top + 3 - block.offsetHeight + "px";
     block.style.left = closest.getBoundingClientRect().left + "px";
   }
 
   if (from == "down") {
     block.classList.add('blocks-item--animate');
-    block.style.top = closest.getBoundingClientRect().top + block.offsetHeight + "px";
+    block.style.top = closest.getBoundingClientRect().top - 3 + block.offsetHeight + "px";
     block.style.left = closest.getBoundingClientRect().left + "px";
+    checkPosition().prepend(block);
   }
 
   if (from == "left") {
     block.classList.add('blocks-item--animate');
-    block.style.top = closest.getBoundingClientRect().top + "px";
-    block.style.left = closest.getBoundingClientRect().left - block.offsetWidth + "px";
+    block.style.top = closest.getBoundingClientRect().top - 8 + "px";
+    block.style.left = closest.getBoundingClientRect().left + 8 - block.offsetWidth + "px";
+    checkPosition().prepend(block);
   }
 
   if (from == "right") {
     block.classList.add('blocks-item--animate');
-    block.style.top = closest.getBoundingClientRect().top + "px";
-    block.style.left = closest.getBoundingClientRect().left + block.offsetWidth + "px";
+    block.style.top = closest.getBoundingClientRect().top + 8 + "px";
+    block.style.left = closest.getBoundingClientRect().left - 8 + block.offsetWidth + "px";
   }
 
   setTimeout(function () {
@@ -313,7 +315,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65260" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55001" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

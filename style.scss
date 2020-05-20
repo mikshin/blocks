@@ -1,3 +1,8 @@
+$block-size: 50px;
+
+main {
+    height: 100vh;
+}
 .container {
     display: flex;
     flex-direction: row;
@@ -13,27 +18,83 @@
     justify-self: center;
     padding: 12px 24px;
     border: 1px solid silver;
+    max-height: 400px;
+    overflow-x: hidden;
+    .blocks-item {
+        margin-bottom: 20px;
+    }
 }
 
 .blocks-item {
-    width: 50px;
-    height: 50px;
+    width: $block-size;
+    height: $block-size;
+    max-height: $block-size;
+    max-width: $block-size;
+    min-width: $block-size;
+    min-height: $block-size;
     font-size: 0;
     cursor: pointer;
-    
+
     &.blocks-item--animate {
         transition: .3s ease top, .3s ease left;
     }
+    
+    &.blocks-item--door {
+        .block-left,
+        .block-right,
+        .block-top {
+            background-image: url(./door.png);
+        }
+    }
+    &.blocks-item--angle {
+        .block-left,
+        .block-right,
+        .block-top {
+            background-image: url(./angle.png);
+        }
+    }
+}
 
-    // TODO: Удалить
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    // &:before {
-    //     content: '+';
-    //     font-size: 90px;
-    //     font-weight: 100;
-    // }
+.wrapper {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform-style: preserve-3d;
+    transform: rotateY(-215deg) rotateX(15deg) rotateZ(-10deg)
+}
+
+.block-left,
+.block-right,
+.block-top {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 0 1px #fff;
+    background: url(./floor.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.block-left {
+    transform: translateZ(-$block-size/2);
+    // background-color: orange;
+    background-position: left center;
+}
+
+.block-right {
+    transform: translateX(-50%) rotateY(90deg);
+    // background-color: lightgreen;
+    background-position: center center;
+}
+
+.block-top {
+    transform: translateY(-50%) rotateX(90deg);
+    // background-color: skyblue;
+    background-position: right center;
 }
 
 .view {
@@ -42,4 +103,9 @@
     position: relative;
     border: 1px solid gray;
     height: 400px;
+}
+
+.blocks-item {
+    transform-style: preserve-3d;
+    transform-origin: 50% 50% 0;
 }
