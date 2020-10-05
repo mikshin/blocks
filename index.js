@@ -7,14 +7,14 @@ var lastZindex = 1;
 window.onload = init;
 
 //обработчик событий кнопки
-document.querySelector(".button.button--add").onclick = function () {
-    console.log()
-    var div = document.createElement("div");
-    div.classList.add("blocks-item");
-    div.innerHTML = this.parentNode.querySelector("input").value;
-    blocksContainer.append(div);
-    init();
-}
+// document.querySelector(".button.button--add").onclick = function () {
+//     console.log()
+//     var div = document.createElement("div");
+//     div.classList.add("blocks-item");
+//     div.innerHTML = this.parentNode.querySelector("input").value;
+//     blocksContainer.append(div);
+//     init();
+// }
 
 // инициализация
 function init() {

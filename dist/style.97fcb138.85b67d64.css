@@ -40,12 +40,12 @@ main {
 .blocks-item.blocks-item--door .block-left,
 .blocks-item.blocks-item--door .block-right,
 .blocks-item.blocks-item--door .block-top {
-  background-image: url(/dist/door.625a2c52.png);
+  background-image: url(/door.625a2c52.6605d801.png);
 }
 .blocks-item.blocks-item--angle .block-left,
 .blocks-item.blocks-item--angle .block-right,
 .blocks-item.blocks-item--angle .block-top {
-  background-image: url(/dist/angle.4066440f.png);
+  background-image: url(/angle.4066440f.1e9ec075.png);
 }
 
 .wrapper {
@@ -66,7 +66,7 @@ main {
   width: 100%;
   height: 100%;
   box-shadow: inset 0 0 0 1px #fff;
-  background: url(/dist/floor.2c0da783.png);
+  background: url(/floor.2c0da783.40034f4e.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -100,4 +100,6 @@ main {
   transform-origin: 50% 50% 0;
 }
 
-/*# sourceMappingURL=/style.97fcb138.css.map */
+
+
+/*# sourceMappingURL=/style.97fcb138.85b67d64.css.map */

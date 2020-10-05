@@ -124,16 +124,15 @@ var viewContainer = document.querySelector('.view');
 var coef = 25;
 var lastZindex = 1;
 window.onload = init; //обработчик событий кнопки
-
-document.querySelector(".button.button--add").onclick = function () {
-  console.log();
-  var div = document.createElement("div");
-  div.classList.add("blocks-item");
-  div.innerHTML = this.parentNode.querySelector("input").value;
-  blocksContainer.append(div);
-  init();
-}; // инициализация
-
+// document.querySelector(".button.button--add").onclick = function () {
+//     console.log()
+//     var div = document.createElement("div");
+//     div.classList.add("blocks-item");
+//     div.innerHTML = this.parentNode.querySelector("input").value;
+//     blocksContainer.append(div);
+//     init();
+// }
+// инициализация
 
 function init() {
   blocks = document.querySelectorAll('.blocks-item');
@@ -315,7 +314,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55001" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55504" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
